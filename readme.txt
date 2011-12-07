@@ -1,0 +1,1 @@
+The JCrypTool Doc project contains the available JCrypTool documentation like the "Getting started with JCrypTool" guide.
