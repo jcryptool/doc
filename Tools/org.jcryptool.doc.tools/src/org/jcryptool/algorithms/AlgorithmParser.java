@@ -2,6 +2,7 @@ package org.jcryptool.algorithms;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -53,10 +54,18 @@ public class AlgorithmParser {
 			NodeList result = (NodeList)expr.evaluate(doc, XPathConstants.NODESET);
 			SortedSet<String> algorithmNames = new TreeSet<String>();
 			for(int i = 0; i < result.getLength(); i++)
-				algorithmNames.add(result.item(i).getTextContent());
+			{
+				algorithmNames.addAll(Arrays.asList((result.item(i).getTextContent().split(","))));
+			}
+			
+			String algorithms = "";
+			for(String name : algorithmNames)
+			{
+				algorithms += name + "\n";
+			}
 			
 			PrintWriter out = new PrintWriter(cmd.getOptionValue("out"));
-			out.println(algorithmNames.toString());
+			out.println(algorithms);
 			out.close();
 	}
 }
