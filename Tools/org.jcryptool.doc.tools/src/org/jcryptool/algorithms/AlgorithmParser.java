@@ -26,46 +26,41 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class AlgorithmParser {
+    public static void main(String[] args) throws XPathExpressionException, SAXException, IOException, ParseException,
+            ParserConfigurationException {
+        CommandLineParser cmdParser = new PosixParser();
+        Options options = new Options();
+        options.addOption("help", false, "prints this message");
+        options.addOption("in", true, "path to algorithms.xml");
+        options.addOption("out", true, "path to algorithms.txt");
+        CommandLine cmd = cmdParser.parse(options, args);
 
-	public static void main(String[] args) throws XPathExpressionException, SAXException, IOException, ParseException, ParserConfigurationException{
-			CommandLineParser cmdParser = new PosixParser();
-			Options options = new Options();
-			options.addOption("help", false, "prints this message");
-			options.addOption("in", true, "path to algorithms.xml");
-			options.addOption("out", true, "path to algorithms.txt");
-			CommandLine cmd = cmdParser.parse(options, args);
-			
-			if(cmd.hasOption("help"))
-			{
-				HelpFormatter formatter = new HelpFormatter();
-				formatter.printHelp("AlgorithmXmlParser extracts algorithm names from algorithms.xml file to algorithms.txt", options );
-				return;
-			}
-			
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder builder;
-			
-			builder = factory.newDocumentBuilder();
-			
-			Document doc = builder.parse(cmd.getOptionValue("in"));
-			XPathFactory xPathfactory = XPathFactory.newInstance();
-			XPath xpath = xPathfactory.newXPath();
-			XPathExpression expr = xpath.compile("//Names");
-			NodeList result = (NodeList)expr.evaluate(doc, XPathConstants.NODESET);
-			SortedSet<String> algorithmNames = new TreeSet<String>();
-			for(int i = 0; i < result.getLength(); i++)
-			{
-				algorithmNames.addAll(Arrays.asList((result.item(i).getTextContent().split(","))));
-			}
-			
-			String algorithms = "";
-			for(String name : algorithmNames)
-			{
-				algorithms += name + System.getProperty("line.separator");
-			}
-			
-			PrintWriter out = new PrintWriter(cmd.getOptionValue("out"));
-			out.print(algorithms);
-			out.close();
-	}
+        if (cmd.hasOption("help")) {
+            HelpFormatter formatter = new HelpFormatter();
+            formatter.printHelp(
+                    "AlgorithmXmlParser extracts algorithm names from algorithms.xml file to algorithms.txt", options);
+            return;
+        }
+
+        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+
+        Document doc = builder.parse(cmd.getOptionValue("in"));
+        XPathFactory xPathfactory = XPathFactory.newInstance();
+        XPath xpath = xPathfactory.newXPath();
+        XPathExpression expr = xpath.compile("//Names");
+        NodeList result = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+        SortedSet<String> algorithmNames = new TreeSet<String>();
+        for (int i = 0; i < result.getLength(); i++) {
+            algorithmNames.addAll(Arrays.asList((result.item(i).getTextContent().split(","))));
+        }
+
+        String algorithms = "";
+        for (String name : algorithmNames) {
+            algorithms += name + System.getProperty("line.separator");
+        }
+
+        PrintWriter out = new PrintWriter(cmd.getOptionValue("out"));
+        out.print(algorithms);
+        out.close();
+    }
 }
