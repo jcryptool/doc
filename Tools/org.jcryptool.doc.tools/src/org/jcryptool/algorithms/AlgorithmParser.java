@@ -61,11 +61,11 @@ public class AlgorithmParser {
 			String algorithms = "";
 			for(String name : algorithmNames)
 			{
-				algorithms += name + "\n";
+				algorithms += name + System.getProperty("line.separator");
 			}
 			
 			PrintWriter out = new PrintWriter(cmd.getOptionValue("out"));
-			out.println(algorithms);
+			out.print(algorithms);
 			out.close();
 	}
 }
