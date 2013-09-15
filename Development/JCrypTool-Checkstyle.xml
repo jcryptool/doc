@@ -100,6 +100,9 @@ JCrypTool Checkstyle configuration required for all projects available in our Gi
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
     </module>
     <module name="UpperEll"/>
+    <module name="SuppressWarnings">
+      <property name="format" value="^unused$"/>
+    </module>
   </module>
   <module name="NewlineAtEndOfFile">
     <property name="severity" value="ignore"/>
