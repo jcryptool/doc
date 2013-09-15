@@ -117,4 +117,7 @@ JCrypTool Checkstyle configuration required for all projects available in our Gi
     <property name="message" value="Line has trailing spaces."/>
     <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
   </module>
+  <module name="SuppressionFilter">
+    <property name="file" value="${samedir}JCrypTool-Checkstyle-Suppressions.xml"/>
+  </module>
 </module>
