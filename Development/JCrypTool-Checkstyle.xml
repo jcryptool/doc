@@ -5,9 +5,8 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: JCrypTool Checkstyle
-    Description: 
-JCrypTool Checkstyle configuration required for all projects available in our Git repositories.
+    Checkstyle-Configuration: CrypTool Checkstyle
+    Description: none
 -->
 <module name="Checker">
   <property name="severity" value="warning"/>
@@ -22,7 +21,9 @@ JCrypTool Checkstyle configuration required for all projects available in our Gi
       <property name="excludeScope" value="private"/>
       <property name="scope" value="package"/>
     </module>
-    <module name="JavadocStyle"/>
+    <module name="JavadocStyle">
+      <property name="checkFirstSentence" value="false"/>
+    </module>
     <module name="ConstantName"/>
     <module name="LocalFinalVariableName"/>
     <module name="LocalVariableName"/>
@@ -102,6 +103,9 @@ JCrypTool Checkstyle configuration required for all projects available in our Gi
     <module name="UpperEll"/>
     <module name="SuppressWarnings">
       <property name="format" value="^unused$"/>
+    </module>
+    <module name="MagicNumber">
+      <property name="ignoreNumbers" value="-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100, 128, 256, 512, 768, 1024, 2048, 4096"/>
     </module>
   </module>
   <module name="NewlineAtEndOfFile">
